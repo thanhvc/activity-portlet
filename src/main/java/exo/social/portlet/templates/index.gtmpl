@@ -1,7 +1,7 @@
-#{param name=activity/}
+#{param name=activityId/}
 
 <div id="gatein">
-    <span class="activity-data" data-activityid="${activity.id}"/>
+    <span class="activity-data" data-activityid="${activityId}"/>
 
     <div class="row">
         <span class="like-container"></span>

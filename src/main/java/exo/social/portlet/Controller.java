@@ -48,12 +48,10 @@ public class Controller
   @View
   public void activity(String activityId) throws IOException
   {
-
-    //
-    ExoSocialActivity activity = am.getActivity(activityId);
+    
     index
         .with()
-        .activity(activity)
+        .activityId(activityId)
         .render();
 
   }
