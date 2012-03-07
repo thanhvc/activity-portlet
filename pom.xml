@@ -83,6 +83,11 @@
       <version>3.2.3-PLF-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <version>1.0-SP4</version>
+    </dependency>
 
   </dependencies>
 

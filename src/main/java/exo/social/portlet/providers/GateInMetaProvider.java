@@ -1,4 +1,4 @@
-package exo.social.portlet;
+package exo.social.portlet.providers;
 
 import org.exoplatform.container.PortalContainer;
 

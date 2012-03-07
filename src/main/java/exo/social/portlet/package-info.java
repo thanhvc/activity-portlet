@@ -24,6 +24,9 @@
 )
 package exo.social.portlet;
 
+import exo.social.portlet.providers.GateInMetaProvider;
+import exo.social.portlet.providers.IdentityProvider;
+import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.juzu.Application;
