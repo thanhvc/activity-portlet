@@ -1,0 +1,16 @@
+#{param name=likers/}
+#{param name=isLiking/}
+
+<% for(liker in likers) { %>
+    <a id="${liker.id}" href="${liker.profile.url}"><img class="smallAvatar" src="${liker.profile.avatarUrl}"/></a>
+    <script>
+        $('#${liker.id}').popover({
+            title: '<img class="smallAvatar" src="${liker.profile.avatarUrl}"/> ${liker.profile.fullName}',
+            content: 'Mail : ${liker.profile.email}'
+        });
+    </script>
+<% }
+  def label = "+ 1"
+  if (isLiking) { label = "- 1" }
+%>
+<button class="btn-mini btn-primary submit like">${label}</button>
