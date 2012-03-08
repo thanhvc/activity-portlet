@@ -4,6 +4,7 @@
     <span>
         <img class="avatar" src="${comment.poster.profile.avatarUrl}"/>
         <a href="${comment.poster.profile.url}">${comment.poster.profile.fullName}</a>
+        <div class="right">${comment.postedTime}</div>
         <div class="well">
             <% if (comment.isOwner()) { %>
             <a data-commentid="${comment.data.id}" class="close delete-comment">&times;</a>

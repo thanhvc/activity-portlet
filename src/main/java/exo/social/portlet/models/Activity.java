@@ -26,11 +26,13 @@ public class Activity {
   Identity poster;
   ExoSocialActivity data;
   boolean isOwner;
+  String postedTime;
 
-  public Activity(final Identity poster, final ExoSocialActivity data, final boolean owner) {
+  public Activity(final Identity poster, final ExoSocialActivity data, final boolean owner, final String postedTime) {
     this.poster = poster;
     this.data = data;
     isOwner = owner;
+    this.postedTime = postedTime;
   }
 
   public Identity getPoster() {
@@ -44,4 +46,9 @@ public class Activity {
   public boolean isOwner() {
     return isOwner;
   }
+
+  public String getPostedTime() {
+    return postedTime;
+  }
+  
 }

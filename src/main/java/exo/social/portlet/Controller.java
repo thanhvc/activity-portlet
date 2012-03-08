@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /** @author <a href="mailto:alain.defrance@exoplatform.com">Alain Defrance</a> */
@@ -175,7 +176,7 @@ public class Controller
     for (ExoSocialActivity data : am.getCommentsWithListAccess(activity).loadAsList(0, 10)) {
       Identity poster = im.getIdentity(data.getUserId(), true);
       applyDefaultAvatar(poster);
-      comments.add(new Activity(poster, data, poster.getId().equals(currentUser.getId())));
+      comments.add(new Activity(poster, data, poster.getId().equals(currentUser.getId()), getPostedTimeInSpaceString(data.getPostedTime())));
     }
 
     return comments;
@@ -189,6 +190,48 @@ public class Controller
       i.getProfile().setAvatarUrl(LinkProvider.PROFILE_DEFAULT_AVATAR_URL);
     }
 
+  }
+
+  private String getPostedTimeInSpaceString(long postedTime) {
+    long time = (new Date().getTime() - postedTime) / 1000;
+    long value;
+    if (time < 60) {
+      return "less than a minute ago";
+    } else {
+      if (time < 120) {
+        return "about a minute ago";
+      } else {
+        if (time < 3600) {
+          value = Math.round(time / 60);
+          return "about "+ value + " minutes ago";
+        } else {
+          if (time < 7200) {
+            return "about an hour ago";
+          } else {
+            if (time < 86400) {
+              value = Math.round(time / 3600);
+              return "about " + value + " hours ago";
+            } else {
+              if (time < 172800) {
+                return "about a day ago";
+              } else {
+                if (time < 2592000) {
+                  value = Math.round(time / 86400);
+                  return "about " + value + " days ago";
+                } else {
+                  if (time < 5184000) {
+                    return "about a month ago";
+                  } else {
+                    value = Math.round(time / 2592000);
+                    return "about " + value + " months ago";
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
 
