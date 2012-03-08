@@ -24,7 +24,6 @@ import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.web.application.RequestContext;
 
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
@@ -33,7 +32,7 @@ public class IdentityProvider implements Provider<Identity> {
 
   @Inject IdentityManager im;
 
-  @Produces @Current
+  @Current
   public Identity get() {
 
     String remote = RequestContext.getCurrentInstance().getRemoteUser();
@@ -43,4 +42,5 @@ public class IdentityProvider implements Provider<Identity> {
 
     return i;
   }
+
 }

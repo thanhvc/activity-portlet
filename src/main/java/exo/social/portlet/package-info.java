@@ -6,7 +6,8 @@
     })
 @Bindings({
   @Binding(value = ActivityManager.class, implementation = GateInMetaProvider.class),
-  @Binding(value = IdentityManager.class, implementation = GateInMetaProvider.class)
+  @Binding(value = IdentityManager.class, implementation = GateInMetaProvider.class),
+  @Binding(value = Identity.class, implementation = IdentityProvider.class)
 })
 @Assets(
   scripts = {
@@ -30,8 +31,8 @@ import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.juzu.Application;
-import org.juzu.impl.inject.Binding;
-import org.juzu.impl.inject.Bindings;
+import org.juzu.inject.Binding;
+import org.juzu.inject.Bindings;
 import org.juzu.plugin.ajax.AjaxPlugin;
 import org.juzu.plugin.asset.AssetPlugin;
 import org.juzu.plugin.asset.Assets;
