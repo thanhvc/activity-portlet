@@ -1,4 +1,0 @@
-<form method="POST" action="@{Controller.loadActivity()}">
-    <label for="activityId">Activity id </label><input id="activityId" type="text" name="activityId"/><br/>
-    <input type="submit" value="Load activity"/>
-</form>

@@ -6,7 +6,7 @@
    http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd">
    <portlet>
      <portlet-name>ActivityPortlet</portlet-name>
-     <display-name xml:lang="EN">Activity Applicaiton</display-name>
+     <display-name xml:lang="EN">Activity Application</display-name>
      <portlet-class>org.juzu.portlet.JuzuPortlet</portlet-class>
      <init-param>
        <name>juzu.run_mode</name>
@@ -22,5 +22,32 @@
      <portlet-info>
        <title>Activity Portlet</title>
      </portlet-info>
+     <supported-public-render-parameter>socNamespace</supported-public-render-parameter>
+     <supported-public-render-parameter>socIntegrationPoint</supported-public-render-parameter>
    </portlet>
+
+   <portlet>
+     <portlet-name>ConfigPortlet</portlet-name>
+     <display-name xml:lang="EN">Config Portlet</display-name>
+     <portlet-class>exo.social.config.ConfigPortlet</portlet-class>
+     <supports>
+       <mime-type>text/html</mime-type>
+     </supports>
+     <portlet-info>
+       <title>Config Portlet</title>
+     </portlet-info>
+     <supported-public-render-parameter>socNamespace</supported-public-render-parameter>
+     <supported-public-render-parameter>socIntegrationPoint</supported-public-render-parameter>
+   </portlet>
+  
+   <public-render-parameter>
+     <identifier>socNamespace</identifier>
+     <qname>socNamespace</qname>
+   </public-render-parameter>
+  
+   <public-render-parameter>
+     <identifier>socIntegrationPoint</identifier>
+     <qname>socIntegrationPoint</qname>
+   </public-render-parameter>
+
 </portlet-app>

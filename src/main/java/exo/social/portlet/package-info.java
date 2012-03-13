@@ -1,9 +1,4 @@
-@Application(
-    name = "ActivityApplication",
-    plugins = {
-        AssetPlugin.class,
-        AjaxPlugin.class
-    })
+@Application(name = "ActivityApplication")
 @Bindings({
   @Binding(value = ActivityManager.class, implementation = GateInMetaProvider.class),
   @Binding(value = IdentityManager.class, implementation = GateInMetaProvider.class),
@@ -31,10 +26,8 @@ import org.exoplatform.social.core.identity.model.Identity;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.juzu.Application;
-import org.juzu.inject.Binding;
-import org.juzu.inject.Bindings;
-import org.juzu.plugin.ajax.AjaxPlugin;
-import org.juzu.plugin.asset.AssetPlugin;
 import org.juzu.plugin.asset.Assets;
 import org.juzu.plugin.asset.Script;
 import org.juzu.plugin.asset.Stylesheet;
+import org.juzu.plugin.binding.Binding;
+import org.juzu.plugin.binding.Bindings;

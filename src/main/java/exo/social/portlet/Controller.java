@@ -4,21 +4,20 @@ import exo.social.portlet.qualifiers.Current;
 import org.exoplatform.social.core.activity.model.ExoSocialActivity;
 import org.exoplatform.social.core.activity.model.ExoSocialActivityImpl;
 import org.exoplatform.social.core.identity.model.Identity;
+import org.exoplatform.social.core.identity.provider.IntegrationIdentityProvider;
 import org.exoplatform.social.core.manager.ActivityManager;
 import org.exoplatform.social.core.manager.IdentityManager;
 import org.exoplatform.social.core.service.LinkProvider;
-import org.juzu.Action;
 import org.juzu.Path;
 import org.juzu.Resource;
-import org.juzu.Response;
 import org.juzu.SessionScoped;
 import org.juzu.View;
 import org.juzu.plugin.ajax.Ajax;
-import org.juzu.template.Template;
 import exo.social.portlet.models.Activity;
 import exo.social.portlet.templates.comments;
 import exo.social.portlet.templates.index;
 import exo.social.portlet.templates.likes;
+import exo.social.portlet.templates.error;
 
 import javax.inject.Inject;
 import java.io.IOException;
@@ -34,26 +33,38 @@ public class Controller
   @Inject ActivityManager am;
   @Inject IdentityManager im;
 
-  @Inject @Path("form.gtmpl")     Template form;
   @Inject @Path("index.gtmpl")    index index;
   @Inject @Path("likes.gtmpl")    likes likes;
   @Inject @Path("comments.gtmpl") comments comments;
+  @Inject @Path("error.gtmpl")    error error;
 
   @Inject @Current @SessionScoped Identity currentUser;
 
   @View
-  public void index() throws IOException
-  {
-    form.render();
-  }
+  public void index(String socNamespace, String socIntegrationPoint) throws IOException {
 
-  @View
-  public void activity(String activityId) throws IOException
-  {
-    
+    //
+    if (socNamespace == null || socIntegrationPoint == null) {
+      error.render();
+      return;
+    }
+
+    //
+    Identity nsIdentity = im.getOrCreateIdentity(IntegrationIdentityProvider.NAME, socNamespace, false);
+    ExoSocialActivity activity = am.getNamedActivity(nsIdentity, socIntegrationPoint);
+
+    //
+    if (activity == null) {
+      activity = new ExoSocialActivityImpl();
+      activity.setType("INTEGRATION");
+      activity.setTitle("Generated activity for integration");
+      am.saveActivityNoReturn(nsIdentity, activity, socIntegrationPoint);
+    }
+
+    //
     index
         .with()
-        .activityId(activityId)
+        .activityId(activity.getId())
         .render();
 
   }
@@ -145,16 +156,6 @@ public class Controller
 
     am.deleteComment(activityId, commentId);
     
-  }
-
-  @Action
-  public Response loadActivity(String activityId) {
-    return Controller_.activity(activityId);
-  }
-
-  @Action
-  public Response back() {
-    return Controller_.index();
   }
 
   private List<Identity> likers(ExoSocialActivity activity) {
